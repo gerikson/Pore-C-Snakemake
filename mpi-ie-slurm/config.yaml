@@ -1,0 +1,28 @@
+cluster: export TMPDIR=/data/extended/$USER; mkdir -p $TMPDIR; mkdir -p /localenv/$USER/anaconda/snakemake-envs;
+  module load slurm && mkdir -p {resources.logdir}/cluster/`date +"%F"`/{rule} &&
+  sbatch --exclude=deep17 --partition={resources.partition} --ntasks-per-node 1 --cpus-per-task={threads}
+  --mem={resources.mem_mb} --job-name=smk-{rule}-{wildcards} --output={resources.logdir}/cluster/`date
+  +"%F"`/{rule}/{rule}-{wildcards}-`date +"%H%m%S"`-job%j.out --error={resources.logdir}/cluster/`date
+  +"%F"`/{rule}/{rule}-{wildcards}-`date +"%H%m%S"`-job%j.err --parsable --mail-user={resources.mail_user}
+  --mail-type={resources.mail_type} --export=TMPDIR
+cluster-cancel: cluster-cancel.sh
+cluster-cancel-nargs: 50
+cluster-status: status-scontrol.sh
+conda-prefix: /localenv/koppstein/anaconda/test-pore-c
+default-resources:
+- partition=bioinfo
+- mem_mb=2400
+- disk_mb=2400
+- logdir=logs
+jobscript: slurm-jobscript.sh
+keep-going: true
+latency-wait: 300
+local-cores: 2
+max-jobs-per-second: 1
+max-status-checks-per-second: 1
+printshellcmds: true
+rerun-incomplete: true
+restart-times: 1
+scheduler: greedy
+use-conda: true
+use-singularity: false
