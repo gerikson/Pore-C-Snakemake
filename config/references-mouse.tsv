@@ -3,5 +3,4 @@
 # refgenome_path: The path of the source fasta path. If a relative path is given then it is relative to the snakemake workdir
 #draft1	.test/resources/GRCh38.fasta.gz
 refgenome_id	refgenome_path
-GRCh38	.test/resources/GRCh38.fasta.gz
-draft1	.test/resources/GRCh38.fasta.gz
+GRCm38	/data/repository/organisms/GRCm38_ensembl/genome_fasta/genome.fa
