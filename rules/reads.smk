@@ -14,6 +14,7 @@ checkpoint import_basecalls:
         PORE_C_CONDA_FILE
     threads: 1
     shell:
+        "rm -f {params.prefix}*; "
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         "reads prepare {params.fname} {params.prefix} --max-read-length {config[max_read_length]} "
         " --batch-size {config[reads_per_batch]} 2> {log}"

@@ -7,16 +7,21 @@ rule to_cooler:
         fragments=paths.virtual_digest.fragments,
     params:
         prefix=to_prefix(paths.matrix.cool, 1),
+        cooler_resolution=config["matrix_resolutions"]["base"],
     log:
         to_log(paths.matrix.cool),
     benchmark:
         to_benchmark(paths.matrix.cool)
     threads: config["software"]["pore_c"]["to_cooler"]["threads"]
+    resources:
+        mem_mb=32000
     conda:
         PORE_C_CONDA_FILE
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
-        " contacts export {input.contacts} cooler {params.prefix} --fragment-table {input.fragments} --chromsizes {input.chromsizes} 2>{log} "
+        " contacts export {input.contacts} cooler {params.prefix} "
+        "--cooler-resolution {params.cooler_resolution} "
+        "--fragment-table {input.fragments} --chromsizes {input.chromsizes} 2>{log} "
 
 
 rule to_haplotyped_cooler:
@@ -28,6 +33,7 @@ rule to_haplotyped_cooler:
         fragments=paths.virtual_digest.fragments,
     params:
         prefix=to_prefix(paths.matrix.haplotyped_cools, 2),
+        cooler_resolution=config["matrix_resolutions"]["base"],
     log:
         to_log(paths.matrix.haplotyped_cools),
     benchmark:
@@ -37,7 +43,9 @@ rule to_haplotyped_cooler:
         PORE_C_CONDA_FILE
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
-        " contacts export {input.contacts} cooler {params.prefix} --by-haplotype --fragment-table {input.fragments} --chromsizes {input.chromsizes} 2>{log} "
+        " contacts export {input.contacts} cooler {params.prefix} "
+        "--cooler-resolution {params.cooler_resolution} "
+        "--by-haplotype --fragment-table {input.fragments} --chromsizes {input.chromsizes} 2>{log} "
 
 
 rule create_mcool_file:
@@ -53,6 +61,8 @@ rule create_mcool_file:
         to_log(paths.matrix.mcool),
     conda:
         "../envs/cooler.yml"
+    resources:
+        mem_mb=16000
     threads: 1
     shell:
         "cooler zoomify -n {threads} -r {params.resolutions} -o {output} {input} 2>{log}"
