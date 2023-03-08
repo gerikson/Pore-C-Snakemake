@@ -150,7 +150,7 @@ rule download_juicer_tools:
     log:
         to_log(paths.juicebox.tools),
     shell:
-        "wget -O - {params.url} > {output} 2>{log}"
+        " wget -O - {params.url} > {output} 2>{log}"
 
 
 rule create_hicRef:

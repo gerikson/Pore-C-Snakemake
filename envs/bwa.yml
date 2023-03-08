@@ -2,7 +2,11 @@ channels:
     - conda-forge
     - bioconda
 dependencies:
+    - python==3.8.0
     - bwa==0.7.17
     - samtools==1.9
-    - pysam==0.15.3
+    - pysam
     - pore-c==0.4.0
+    - pip:
+      - fsspec>=0.3.3
+      - dask[complete]

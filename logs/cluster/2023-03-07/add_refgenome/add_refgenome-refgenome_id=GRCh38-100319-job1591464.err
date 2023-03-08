@@ -1,0 +1,37 @@
+slurmstepd: error: *** JOB 1591464 ON deep10 CANCELLED AT 2023-03-07T10:57:21 ***
+Building DAG of jobs...
+/bin/bash: conda: command not found
+Traceback (most recent call last):
+  File "/package/mamba/envs/pore-c-0.0.2/lib/python3.11/site-packages/snakemake/__init__.py", line 747, in snakemake
+    success = workflow.execute(
+              ^^^^^^^^^^^^^^^^^
+  File "/package/mamba/envs/pore-c-0.0.2/lib/python3.11/site-packages/snakemake/workflow.py", line 926, in execute
+    dag.create_conda_envs(
+  File "/package/mamba/envs/pore-c-0.0.2/lib/python3.11/site-packages/snakemake/dag.py", line 338, in create_conda_envs
+    env.create(dryrun)
+  File "/package/mamba/envs/pore-c-0.0.2/lib/python3.11/site-packages/snakemake/deployment/conda.py", line 405, in create
+    pin_file = self.pin_file
+               ^^^^^^^^^^^^^
+  File "/package/mamba/envs/pore-c-0.0.2/lib/python3.11/site-packages/snakemake/common/__init__.py", line 213, in __get__
+    value = self.method(instance)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/package/mamba/envs/pore-c-0.0.2/lib/python3.11/site-packages/snakemake/deployment/conda.py", line 109, in pin_file
+    f".{self.conda.platform}.pin.txt"
+        ^^^^^^^^^^
+  File "/package/mamba/envs/pore-c-0.0.2/lib/python3.11/site-packages/snakemake/common/__init__.py", line 213, in __get__
+    value = self.method(instance)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/package/mamba/envs/pore-c-0.0.2/lib/python3.11/site-packages/snakemake/deployment/conda.py", line 102, in conda
+    return Conda(
+           ^^^^^^
+  File "/package/mamba/envs/pore-c-0.0.2/lib/python3.11/site-packages/snakemake/deployment/conda.py", line 667, in __init__
+    shell.check_output(self._get_cmd(f"conda info --json"), text=True)
+  File "/package/mamba/envs/pore-c-0.0.2/lib/python3.11/site-packages/snakemake/shell.py", line 63, in check_output
+    return sp.check_output(cmd, shell=True, executable=executable, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/package/mamba/envs/pore-c-0.0.2/lib/python3.11/subprocess.py", line 465, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/package/mamba/envs/pore-c-0.0.2/lib/python3.11/subprocess.py", line 569, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'conda info --json' returned non-zero exit status 127.
