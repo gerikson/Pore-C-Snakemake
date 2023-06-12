@@ -1,5 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
+source /home/$USER/.bashrc
 echo $PATH
 echo `hostname`
 scratch=$(mktemp -p /data/extended/$USER -d -t tmp.XXXXXXXXXXXXXXXX);

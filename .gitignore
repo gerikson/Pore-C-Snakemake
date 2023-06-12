@@ -4,6 +4,7 @@ dask-worker-space
 .test/results/*
 .snakemake
 results*
+logs*
 default.profraw
 .venv
 .tox
