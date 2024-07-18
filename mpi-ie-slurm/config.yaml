@@ -10,8 +10,8 @@ cluster-status: status-scontrol.sh
 conda-prefix: /package/mamba/envs/pore-c-mpi_envs
 default-resources:
 - partition=bioinfo
-- mem_mb=2400
-- disk_mb=2400
+- mem_mb=4800
+- disk_mb=4800
 - logdir=logs
 jobscript: slurm-jobscript.sh
 keep-going: true
